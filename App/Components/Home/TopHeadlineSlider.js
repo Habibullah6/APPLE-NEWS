@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Dimensions,
   FlatList,
@@ -7,20 +7,12 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import GlobalApi from "../../Services/GlobalApi";
+
 import Color from "../../Shared/Color";
+import { useNavigation } from "@react-navigation/native";
 
-export default function TopHeadlineSlider() {
-  const [newsList, setNewsList] = useState([]);
-  useEffect(() => {
-    getTopHeadline();
-  }, []);
-
-  const getTopHeadline = async () => {
-    const result = (await GlobalApi.getTopHeadline).data;
-    setNewsList(result.articles);
-  };
-
+export default function TopHeadlineSlider({ newsList }) {
+  const navigation = useNavigation();
   return (
     <View style={{ marginTop: 15 }}>
       <FlatList
@@ -29,6 +21,7 @@ export default function TopHeadlineSlider() {
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
           <TouchableOpacity
+            onPress={() => navigation.navigate("read-news", { news: item })}
             style={{
               width: Dimensions.get("screen").width * 0.8,
               marginRight: 10,
@@ -45,7 +38,7 @@ export default function TopHeadlineSlider() {
               {item.title}
             </Text>
             <Text style={{ marginTop: 5, color: Color.primary }}>
-              {item?.source.name}
+              {item?.source?.name}
             </Text>
           </TouchableOpacity>
         )}
