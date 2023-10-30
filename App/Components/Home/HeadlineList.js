@@ -8,8 +8,10 @@ import {
   Dimensions,
 } from "react-native";
 import Color from "../../Shared/Color";
+import { useNavigation } from "@react-navigation/native";
 
 export default function HeadlineList({ newsList }) {
+  const navigation = useNavigation();
   return (
     <View>
       <FlatList
@@ -26,7 +28,7 @@ export default function HeadlineList({ newsList }) {
               }}
             ></View>
             <TouchableOpacity
-              onPress={() => console.log("click")}
+              onPress={() => navigation.navigate("read-news", { news: item })}
               style={{
                 marginTop: 15,
 

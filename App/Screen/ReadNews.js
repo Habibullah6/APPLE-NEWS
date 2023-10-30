@@ -1,9 +1,18 @@
 import React, { useEffect } from "react";
-import { Image, SafeAreaView, Share, Text, View } from "react-native";
+import {
+  Image,
+  SafeAreaView,
+  ScrollView,
+  Share,
+  Text,
+  View,
+} from "react-native";
 import Color from "../Shared/Color";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
+
+import * as WebBrowser from "expo-web-browser";
 
 export default function ReadNews() {
   const navigation = useNavigation();
@@ -16,7 +25,7 @@ export default function ReadNews() {
     });
   };
   return (
-    <View style={{ backgroundColor: Color.white, flex: 1 }}>
+    <ScrollView style={{ backgroundColor: Color.white, flex: 1 }}>
       <View
         style={{
           display: "flex",
@@ -54,16 +63,18 @@ export default function ReadNews() {
         {news.description}
       </Text>
 
-      <Text
-        style={{
-          marginTop: 10,
-          color: Color.primary,
-          fontSize: 16,
-          fontWeight: "bold",
-        }}
-      >
-        Read More
-      </Text>
-    </View>
+      <TouchableOpacity onPress={() => WebBrowser.openBrowserAsync(news.url)}>
+        <Text
+          style={{
+            marginTop: 10,
+            color: Color.primary,
+            fontSize: 16,
+            fontWeight: "bold",
+          }}
+        >
+          Read More
+        </Text>
+      </TouchableOpacity>
+    </ScrollView>
   );
 }

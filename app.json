@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "APPLE-NEWS",
-    "slug": "APPLE-NEWS",
+    "slug": "apple-news",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ebb9c52e-1943-4a15-a25b-bfa20e9bb284"
+      }
+    },
+    "owner": "habibullah212266"
   }
 }

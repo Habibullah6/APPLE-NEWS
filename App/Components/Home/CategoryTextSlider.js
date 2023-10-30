@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import Color from "../../Shared/Color";
 
-export default function CategoryTextSlider() {
+export default function CategoryTextSlider({ selectCategory }) {
   const [active, setActive] = useState(1);
   const categoryData = [
     { id: 1, name: "Latest" },
@@ -29,7 +29,12 @@ export default function CategoryTextSlider() {
         horizontal
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => onCategoryClick(item.id)}>
+          <TouchableOpacity
+            onPress={() => {
+              onCategoryClick(item.id);
+              selectCategory(item.name);
+            }}
+          >
             <Text
               style={
                 item.id === active ? styles.selectedText : styles.unselectedText
